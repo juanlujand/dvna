@@ -1,6 +1,6 @@
 # Damn Vulnerable NodeJS Application (DVNA)
 
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/juanlujand/dvna/badge)](https://securityscorecards.dev/viewer/?uri=github.com/juanlujand/dvna)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/juanlujand/dvna/badge)](https://securityscorecards.dev/viewer/?uri=github.com/juanlujand/dvna.git)
 
 
 ![dvna-logo](docs/resources/dvna.png)
