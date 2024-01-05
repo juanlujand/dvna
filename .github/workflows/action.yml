@@ -1,0 +1,107 @@
+name: "Legitify Analyze"
+description: "Legitify GitHub Action"
+branding:
+  color: "purple"
+  icon: "target"
+inputs:
+  github_token:
+    description: "GitHub Personal Access Token"
+    required: true
+  analyze_self_only:
+    description: "If this is set, only the repo where this action is called from will be analyzed"
+    required: false
+    default: "false"
+  repositories:
+    description: "Strings of owner/repo. If this is set, only selected repositories will be analyzed"
+    required: false
+  legitify_base_version:
+    description: "The base version of legitify to use. Non breaking changes will be auto updated."
+    required: false
+    default: "1.0"
+  scorecard:
+    description: 'Whether to run scorecard as part of the analysis (no/yes/verbose default to "no")'
+    required: false
+    default: "no"
+  upload_code_scanning:
+    description: 'Whether to upload the results to GitHub Code Scanning'
+    required: false
+    default: "true"
+  compile_legitify:
+    description: "Compile legitify from source (use legitify_base_version as ref)"
+    required: false
+    default: "false"
+  artifact_name:
+    description: "If the repository where this action runs is private, the analysis report will be saved as an artifact with this name"
+    required: false
+    default: "legitify-report"
+  ignore-policies:
+    description: "List of policies to ignore (SKIP). Policies should be seperated by a new line"
+    required: false
+    default: ""
+  extra:
+    description: "Additional arguments"
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - id: setup-go
+      if: ${{ inputs.compile_legitify == 'true' }}
+      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # ratchet:actions/setup-go@v3
+      with:
+        go-version: 1.19
+    - id: checkout_legitify
+      if: ${{ inputs.compile_legitify == 'true' }}
+      uses: 'actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b'
+      with:
+        repository: Legit-Labs/legitify
+        ref: ${{ inputs.legitify_base_version }}
+        path: legitify-build 
+
+    - id: compile_legitify
+      if: ${{ inputs.compile_legitify == 'true' }}
+      shell: bash
+      run: |
+        cd legitify-build
+        go build -o "${GITHUB_ACTION_PATH}/legitify"
+
+    - id: create_ignore_policies_file
+      shell: bash
+      run: |
+        echo "${{ inputs.ignore-policies }}" > "${GITHUB_ACTION_PATH}/ignored-policies"
+    - uses: actions/setup-node@v3
+      with:
+          node-version: '16'
+
+    - id: analyze
+      shell: bash
+      env:
+        github_token: ${{ inputs.github_token }}
+        analyze_self_only: ${{ inputs.analyze_self_only }}
+        repositories: ${{ inputs.repositories }}
+        legitify_base_version: ${{ inputs.legitify_base_version }}
+        scorecard: ${{ inputs.scorecard }}
+        upload_code_scanning: ${{ inputs.upload_code_scanning }}
+        compile_legitify: ${{ inputs.compile_legitify }}
+        ignore-policies-file: ./ignored-policies
+        extra: ${{ inputs.extra }}
+      run: |
+        cd "$GITHUB_ACTION_PATH"
+        node index.js
+    - id: reports
+      shell: bash
+      run: |
+        cp "$GITHUB_ACTION_PATH"/legitify-output.* . || echo 'no files to copy'
+    - name: "Upload SARIF as Code Scanning Results"
+      if: ${{ inputs.upload_code_scanning == 'true' }}
+      continue-on-error: true
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: legitify-output.sarif
+        category: "legitify-report"
+    - name: "Upload outputs as Workflow Artifacts"
+      if: ${{ steps.analyze.outputs.is_private == 'true' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.artifact_name }}
+        path: legitify-output.*
