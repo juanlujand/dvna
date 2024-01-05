@@ -1,0 +1,38 @@
+name: Build Docs
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '**.rego'
+
+permissions:
+  contents: 'write'
+jobs:
+  update_docs:
+    environment: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out the main branch
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # ratchet:actions/checkout@v3
+        with:
+          token: ${{ secrets.DOCS_TOKEN }}
+      - uses: actions/setup-go@c4a742cab115ed795e34d4513e2cf7d472deb55f # ratchet:actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: build docs
+        run: make docs
+      - name: update docs
+        run: |
+          mv ./docs ..
+          git fetch origin gh-docs
+          git checkout "gh-docs"
+          rm -rf ./docs
+          mv ../docs .
+          git config --global user.name "build docs workflow"
+          git config --global user.email "docs@legitsecurity.com"
+          git add -A
+          if git commit -m "update docs"; then
+            git push
+          fi
