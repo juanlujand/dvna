@@ -2,6 +2,7 @@
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/juanlujand/dvna/badge)](https://securityscorecards.dev/viewer/?uri=github.com/juanlujand/dvna)
 
+[![Build & Test](https://github.com/juanlujand/dvna/actions/workflows/build_and_test.yaml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/build_and_test.yaml)
 
 ![dvna-logo](docs/resources/dvna.png)
 
