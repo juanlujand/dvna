@@ -4,6 +4,8 @@
 
 [![Build & Test](https://github.com/juanlujand/dvna/actions/workflows/build_and_test.yaml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/build_and_test.yaml)
 
+[![Code Analysis](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml)
+
 ![dvna-logo](docs/resources/dvna.png)
 
 
