@@ -6,9 +6,11 @@
 
 [![Code Analysis](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml)
 
+[![codecov badge Example](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml)
+
 ![dvna-logo](docs/resources/dvna.png)
 
-[![codecov badge Example](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml)
+
 
 Damn Vulnerable NodeJS Application (DVNA) is a simple NodeJS application to demonstrate [**OWASP Top 10 Vulnerabilities**](https://www.owasp.org/index.php/Top_10-2017_Top_10) and guide on fixing and avoiding these vulnerabilities. The [fixes](https://github.com/appsecco/dvna/tree/fixes) branch will contain fixes for the vulnerabilities. Fixes for vulnerabilities OWASssP Top 10 2017 vulnerabilities at [fixes-2017](https://github.com/appsecco/dvna/tree/fixes-2017) branch.
 
