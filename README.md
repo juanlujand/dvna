@@ -8,6 +8,8 @@
 
 [![codecov badge Example](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml)
 
+[![codecov](https://codecov.io/gh/juanlujand/dvna/graph/badge.svg?token=7BQGYONIZS)](https://codecov.io/gh/juanlujand/dvna)
+
 ![dvna-logo](docs/resources/dvna.png)
 
 
