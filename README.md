@@ -6,7 +6,7 @@
 
 [![Code Analysis](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/code_analysis.yaml)
 
-[![codecov badge Example](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/codecovbadge.yml)
+[![codecov badge Example](https://github.com/juanlujand/dvna/actions/workflows/CodeCovBadge.yml/badge.svg)](https://github.com/juanlujand/dvna/actions/workflows/CodeCovBadge.yml)
 
 [![codecov](https://codecov.io/gh/juanlujand/dvna/graph/badge.svg?token=7BQGYONIZS)](https://codecov.io/gh/juanlujand/dvna)
 
