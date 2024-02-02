@@ -1,4 +1,4 @@
-# Damn Vulnerable NodeJS Application (DVNA)
+# Damn Vulnerable NodeJS Application (DVNA)- Use for Github Badge testing and ScoreCard
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/juanlujand/dvna/badge)](https://securityscorecards.dev/viewer/?uri=github.com/juanlujand/dvna)
 
